@@ -1,7 +1,13 @@
 "use strict";
 
 const createPlayer = function (name, marker) {
-  return { name, marker };
+  const htmlElementWrapper = (function () {
+    const htmlElement = document.createElement("div");
+    htmlElement.classList.add("player-card");
+    return { htmlElement };
+  })();
+
+  return { name, marker, htmlElementWrapper };
 };
 
 const gameState = (function () {
@@ -11,6 +17,25 @@ const gameState = (function () {
   ];
   let _currentPlayer = 0;
 
+  const htmlElementWrapper = (function () {
+    const htmlElement = document.createElement("div");
+    htmlElement.classList.add("game-state");
+
+    for (const player of _players) {
+      htmlElement.appendChild(player.htmlElementWrapper.htmlElement);
+    }
+
+    const _turnDisplay = document.createElement("div");
+    _turnDisplay.classList.add("turn-display");
+    htmlElement.appendChild(_turnDisplay);
+
+    const _gameControls = document.createElement("div");
+    _gameControls.classList.add("game-controls");
+    htmlElement.appendChild(_gameControls);
+
+    return { htmlElement };
+  })();
+
   function nextPlayer() {
     _currentPlayer = (_currentPlayer + 1) % _players.length;
   }
@@ -19,7 +44,7 @@ const gameState = (function () {
     return _players[_currentPlayer];
   }
 
-  return { nextPlayer, getCurrentPlayer };
+  return { htmlElementWrapper, nextPlayer, getCurrentPlayer };
 })();
 
 const gameBoard = (function () {
@@ -116,6 +141,7 @@ const gameBoard = (function () {
 
 const main = (function () {
   document.body.appendChild(gameBoard.htmlElementWrapper.htmlElement);
+  document.body.appendChild(gameState.htmlElementWrapper.htmlElement);
 
   return {};
 })();
