@@ -59,6 +59,8 @@ const gameState = (function () {
           element.textContent = winner.name + " wins!";
         }
         element.textContent += " Play again?";
+      } else {
+        element.textContent = getCurrentPlayer().name + "'s turn!";
       }
     }
 
@@ -112,6 +114,7 @@ const gameBoard = (function () {
           const isValid = _markCell(gameState.getCurrentPlayer(), j, i);
           if (isValid) {
             gameState.nextPlayer();
+            htmlElementWrapper.updateCellDisplay();
           }
         });
       }
@@ -171,7 +174,6 @@ const gameBoard = (function () {
     if (isGameOver()) return false;
 
     _array[y][x] = player;
-    htmlElementWrapper.updateCellDisplay();
     return true;
   }
 
@@ -181,6 +183,7 @@ const gameBoard = (function () {
 const main = (function () {
   document.body.appendChild(gameBoard.htmlElementWrapper.htmlElement);
   document.body.appendChild(gameState.htmlElementWrapper.htmlElement);
+  gameState.htmlElementWrapper.updateContents();
 
   return {};
 })();
