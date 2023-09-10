@@ -19,7 +19,7 @@ const gameState = (function () {
     return _players[_currentPlayer];
   }
 
-  return { getCurrentPlayer };
+  return { nextPlayer, getCurrentPlayer };
 })();
 
 const gameBoard = (function () {
@@ -42,11 +42,40 @@ const gameBoard = (function () {
         cell.classList.add("board-cell");
         cell.dataset.x = j.toString();
         cell.dataset.y = i.toString();
+
+        const cellMarker = document.createElement("p");
+        cell.appendChild(cellMarker);
+
+        cell.addEventListener("click", () => {
+          const isValid = _markCell(gameState.getCurrentPlayer(), j, i);
+          if (isValid) {
+            gameState.nextPlayer();
+          }
+        });
       }
     }
 
-    return { htmlElement };
+    function updateCellDisplay() {
+      for (let i = 0; i < _array.length; i++) {
+        for (let j = 0; j < _array[i].length; j++) {
+          const cell = htmlElement.querySelector(
+            `.board-cell[data-x="${j}"][data-y="${i}"]`,
+          );
+          cell.firstChild.textContent = _array[i][j];
+        }
+      }
+    }
+
+    return { htmlElement, updateCellDisplay };
   })();
+
+  function _markCell(player, x, y) {
+    if (_array[y][x] !== null) return false;
+
+    _array[y][x] = player.marker;
+    htmlElementWrapper.updateCellDisplay();
+    return true;
+  }
 
   return { htmlElementWrapper };
 })();
