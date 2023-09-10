@@ -32,41 +32,43 @@ body {
   border: 1px solid black;
   min-width: 200px;
   display: grid;
-  grid-template: 1fr 1fr / 1fr 1fr;
+  grid-template: 1fr 1fr / 2fr 1fr 1fr;
   gap: 1rem;
   padding: 1rem;
+  max-height: 48dvh;
 }
 
 .game-state .player-card {
-  align-items: center;
   border: 1px solid black;
   display: grid;
-  grid-template: 1fr 1fr / 1fr 1fr;
+  grid-template-rows: min-content min-content min-content;
+  padding: 1rem;
+  gap: 1rem;
+  justify-items: center;
+  align-items: center;
 }
 
 .game-state .player-card .player-marker {
-  justify-self: center;
-  font-size: 3rem;
-  grid-row: 1 / -1;
+  grid-row: 1;
+  font-size: 2rem;
 }
 
 .game-state .player-card .player-name {
   align-self: end;
 }
 
-.game-state .player-card .player-change-name-btn {
+.game-state .player-card .player-name-change-btn {
   align-self: start;
-  justify-self: start;
 }
 
 .game-state .turn-display {
-  grid-row: 1;
-  grid-column: 2;
+  grid-row: 2;
+  grid-column: 1 / -1;
   border: 1px solid black;
 }
 
 .game-state .game-controls {
-  grid-row: 2;
-  grid-column: 2;
+  grid-row: 1;
+  grid-column: 1;
   border: 1px solid black;
 }
