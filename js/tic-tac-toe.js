@@ -69,8 +69,42 @@ const gameBoard = (function () {
     return { htmlElement, updateCellDisplay };
   })();
 
+  function _getWinner() {
+    for (const row of _array) {
+      if (row[0] === null) continue;
+      if (row[0] === row[1] && row[1] === row[2]) return row[0];
+    }
+
+    for (let x = 0; x < _array.length; x++) {
+      if (_array[0][x] === null) continue;
+      if (_array[0][x] === _array[1][x] && _array[1][x] === _array[2][x])
+        return _array[0][x];
+    }
+
+    if (
+      (_array[0][0] === _array[1][1] && _array[1][1] === _array[2][2]) ||
+      (_array[0][2] === _array[1][1] && _array[1][1] === _array[2][0])
+    ) {
+      if (_array[1][1] !== null) return _array[1][1];
+    }
+
+    return null;
+  }
+
+  function _isGameOver() {
+    if (_getWinner() !== null) return true;
+
+    for (const row of _array) {
+      for (const cell of row) {
+        if (cell === null) return false;
+      }
+    }
+    return true;
+  }
+
   function _markCell(player, x, y) {
     if (_array[y][x] !== null) return false;
+    if (_isGameOver()) return false;
 
     _array[y][x] = player.marker;
     htmlElementWrapper.updateCellDisplay();
