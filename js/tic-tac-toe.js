@@ -44,13 +44,33 @@ const gameState = (function () {
 
     const _turnDisplay = document.createElement("div");
     _turnDisplay.classList.add("turn-display");
+    _turnDisplay.appendChild(document.createElement("p"));
     htmlElement.appendChild(_turnDisplay);
+
+    function _updateTurnDisplay() {
+      const element = _turnDisplay.querySelector("p");
+
+      if (gameBoard.isGameOver()) {
+        const winner = gameBoard.getWinner();
+
+        if (winner === null) {
+          element.textContent = "Draw!";
+        } else {
+          element.textContent = winner.name + " wins!";
+        }
+        element.textContent += " Play again?";
+      }
+    }
 
     const _gameControls = document.createElement("div");
     _gameControls.classList.add("game-controls");
     htmlElement.appendChild(_gameControls);
 
-    return { htmlElement };
+    function updateContents() {
+      _updateTurnDisplay();
+    }
+
+    return { htmlElement, updateContents };
   })();
 
   function nextPlayer() {
@@ -103,15 +123,17 @@ const gameBoard = (function () {
           const cell = htmlElement.querySelector(
             `.board-cell[data-x="${j}"][data-y="${i}"]`,
           );
-          cell.firstChild.textContent = _array[i][j];
+          cell.firstChild.textContent =
+            _array[i][j] === null ? "" : _array[i][j].marker;
         }
       }
+      gameState.htmlElementWrapper.updateContents();
     }
 
     return { htmlElement, updateCellDisplay };
   })();
 
-  function _getWinner() {
+  function getWinner() {
     for (const row of _array) {
       if (row[0] === null) continue;
       if (row[0] === row[1] && row[1] === row[2]) return row[0];
@@ -133,8 +155,8 @@ const gameBoard = (function () {
     return null;
   }
 
-  function _isGameOver() {
-    if (_getWinner() !== null) return true;
+  function isGameOver() {
+    if (getWinner() !== null) return true;
 
     for (const row of _array) {
       for (const cell of row) {
@@ -146,14 +168,14 @@ const gameBoard = (function () {
 
   function _markCell(player, x, y) {
     if (_array[y][x] !== null) return false;
-    if (_isGameOver()) return false;
+    if (isGameOver()) return false;
 
-    _array[y][x] = player.marker;
+    _array[y][x] = player;
     htmlElementWrapper.updateCellDisplay();
     return true;
   }
 
-  return { htmlElementWrapper };
+  return { isGameOver, getWinner, htmlElementWrapper };
 })();
 
 const main = (function () {
