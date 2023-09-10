@@ -114,13 +114,13 @@ const gameBoard = (function () {
           const isValid = _markCell(gameState.getCurrentPlayer(), j, i);
           if (isValid) {
             gameState.nextPlayer();
-            htmlElementWrapper.updateCellDisplay();
+            htmlElementWrapper.updateContents();
           }
         });
       }
     }
 
-    function updateCellDisplay() {
+    function updateContents() {
       for (let i = 0; i < _array.length; i++) {
         for (let j = 0; j < _array[i].length; j++) {
           const cell = htmlElement.querySelector(
@@ -133,7 +133,7 @@ const gameBoard = (function () {
       gameState.htmlElementWrapper.updateContents();
     }
 
-    return { htmlElement, updateCellDisplay };
+    return { htmlElement, updateContents };
   })();
 
   function getWinner() {
