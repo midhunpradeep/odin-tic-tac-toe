@@ -1,0 +1,18 @@
+body {
+  min-height: 100dvh;
+  display: grid;
+}
+
+.game-board {
+  justify-self: center;
+  max-height: 75dvh;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.game-board .board-cell {
+  border: 1px solid black;
+}
