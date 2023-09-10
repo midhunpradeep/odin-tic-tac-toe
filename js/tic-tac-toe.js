@@ -4,6 +4,23 @@ const createPlayer = function (name, marker) {
   const htmlElementWrapper = (function () {
     const htmlElement = document.createElement("div");
     htmlElement.classList.add("player-card");
+
+    const _playerName = document.createElement("p");
+    _playerName.classList.add("player-name");
+    _playerName.textContent = name;
+    htmlElement.appendChild(_playerName);
+
+    const _playerMarker = document.createElement("player-marker");
+    _playerMarker.classList.add("player-marker");
+    _playerMarker.textContent = marker;
+    htmlElement.appendChild(_playerMarker);
+
+    const _changeNameBtn = document.createElement("button");
+    _changeNameBtn.classList.add("player-change-name-btn");
+    _changeNameBtn.textContent = "Change Name";
+    _changeNameBtn.type = "button";
+    htmlElement.appendChild(_changeNameBtn);
+
     return { htmlElement };
   })();
 

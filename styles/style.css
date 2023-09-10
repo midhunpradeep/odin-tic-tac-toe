@@ -37,7 +37,25 @@ body {
 }
 
 .game-state .player-card {
+  align-items: center;
   border: 1px solid black;
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+}
+
+.game-state .player-card .player-marker {
+  justify-self: center;
+  font-size: 3rem;
+  grid-row: 1 / -1;
+}
+
+.game-state .player-card .player-name {
+  align-self: end;
+}
+
+.game-state .player-card .player-change-name-btn {
+  align-self: start;
+  justify-self: start;
 }
 
 .game-state .turn-display {
