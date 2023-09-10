@@ -1,5 +1,27 @@
 "use strict";
 
+const createPlayer = function (name, marker) {
+  return { name, marker };
+};
+
+const gameState = (function () {
+  const _players = [
+    createPlayer("Player 1", "X"),
+    createPlayer("Player 2", "O"),
+  ];
+  let _currentPlayer = 0;
+
+  function nextPlayer() {
+    _currentPlayer = (_currentPlayer + 1) % _players.length;
+  }
+
+  function getCurrentPlayer() {
+    return _players[_currentPlayer];
+  }
+
+  return { getCurrentPlayer };
+})();
+
 const gameBoard = (function () {
   const _array = [];
   for (let i = 0; i < 3; i++) {
