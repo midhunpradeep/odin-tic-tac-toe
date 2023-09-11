@@ -12,7 +12,7 @@ const createPlayer = function (name, marker) {
     _playerName.textContent = player.name;
     htmlElement.appendChild(_playerName);
 
-    const _playerMarker = document.createElement("player-marker");
+    const _playerMarker = document.createElement("p");
     _playerMarker.classList.add("player-marker");
     _playerMarker.textContent = player.marker;
     htmlElement.appendChild(_playerMarker);
