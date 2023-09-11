@@ -75,3 +75,28 @@ body {
   grid-column: 1;
   border: 1px solid black;
 }
+
+.name-change-dialog {
+  border: 1px solid black;
+  padding: 0;
+  margin: auto;
+}
+
+.name-change-dialog form {
+  display: grid;
+  grid-template: 1fr 1fr / max-content 1fr 1fr;
+  gap: 1rem 0.5rem;
+  padding: 1rem 2rem;
+}
+
+.name-change-dialog form input {
+  grid-column: 2 / -1;
+}
+
+.name-change-dialog .new-name-change-btn {
+  grid-column: 2;
+}
+
+.new-name-change-btn .new-name-cancel-btn {
+  grid-column: 3;
+}

@@ -13,5 +13,22 @@
     <script src="js/tic-tac-toe.js" defer></script>
     <title>Tic Tac Toe</title>
   </head>
-  <body></body>
+  <body>
+    <dialog class="name-change-dialog" id="name-change-dialog">
+      <form method="dialog">
+        <label for="new-name">New Name</label>
+        <input type="text" name="name" id="new-name" required />
+        <button class="new-name-change-btn" id="new-name-change-btn">
+          Change
+        </button>
+        <button
+          class="new-name-cancel-btn"
+          id="new-name-cancel-btn"
+          type="button"
+        >
+          Cancel
+        </button>
+      </form>
+    </dialog>
+  </body>
 </html>

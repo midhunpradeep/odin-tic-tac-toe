@@ -1,18 +1,20 @@
 "use strict";
 
 const createPlayer = function (name, marker) {
-  const htmlElementWrapper = (function () {
+  const player = { name, marker };
+
+  player.htmlElementWrapper = (function () {
     const htmlElement = document.createElement("div");
     htmlElement.classList.add("player-card");
 
     const _playerName = document.createElement("p");
     _playerName.classList.add("player-name");
-    _playerName.textContent = name;
+    _playerName.textContent = player.name;
     htmlElement.appendChild(_playerName);
 
     const _playerMarker = document.createElement("player-marker");
     _playerMarker.classList.add("player-marker");
-    _playerMarker.textContent = marker;
+    _playerMarker.textContent = player.marker;
     htmlElement.appendChild(_playerMarker);
 
     const _changeNameBtn = document.createElement("button");
@@ -21,10 +23,42 @@ const createPlayer = function (name, marker) {
     _changeNameBtn.type = "button";
     htmlElement.appendChild(_changeNameBtn);
 
+    const _changeNameDialog = document.getElementById("name-change-dialog");
+    const _changeNameForm = _changeNameDialog.querySelector(
+      `form[method="dialog"]`,
+    );
+    const _changeNameInput = document.getElementById("new-name");
+    const _changeNameCancelBtn = _changeNameDialog.querySelector(
+      ".new-name-cancel-btn",
+    );
+    _changeNameDialog.addEventListener("click", (event) => {
+      if (event.target === _changeNameDialog) {
+        _changeNameDialog.close();
+      }
+    });
+    _changeNameCancelBtn.addEventListener("click", () => {
+      _changeNameDialog.close();
+    });
+
+    _changeNameBtn.addEventListener("click", () => {
+      _changeNameInput.value = player.name;
+      _changeNameForm.onsubmit = () => {
+        player.name = _changeNameInput.value;
+        updateContents();
+      };
+
+      _changeNameDialog.showModal();
+    });
+
+    function updateContents() {
+      _playerName.textContent = player.name;
+      _playerMarker.textContent = player.marker;
+    }
+
     return { htmlElement };
   })();
 
-  return { name, marker, htmlElementWrapper };
+  return player;
 };
 
 const gameState = (function () {
