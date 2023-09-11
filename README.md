@@ -1,4 +1,4 @@
-# Etch-A-Sketch
+# Tic Tac Toe
 
 A [project](https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe)
 to demonstrate knowledge of Factory functions and the Module pattern.
