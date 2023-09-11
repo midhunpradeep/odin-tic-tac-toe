@@ -58,10 +58,6 @@ body {
   align-self: end;
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-  aspect-ratio: 1 / 1;
-  min-width: max(300px, 45dvw);
-  min-height: 200px;
-  max-height: 48dvh;
   gap: 1rem;
   padding: 1rem;
 }
@@ -71,6 +67,8 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 3rem;
+  min-width: max(5rem, 5dvw);
+  min-height: max(5rem, 5dvw);
 }
 
 .game-state {
