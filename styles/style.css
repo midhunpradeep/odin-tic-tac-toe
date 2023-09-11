@@ -13,10 +13,18 @@ html {
 body {
   min-height: 100dvh;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: min-content min-content 1fr;
   gap: 1rem;
   padding: 1rem;
   background-color: var(--color-1);
+}
+
+body > h1 {
+  justify-self: center;
+  align-self: center;
+  color: var(--color-3);
+  font-size: 3rem;
+  margin: 0;
 }
 
 .game-state,
