@@ -53,6 +53,7 @@ const createPlayer = function (name, marker) {
     function updateContents() {
       _playerName.textContent = player.name;
       _playerMarker.textContent = player.marker;
+      gameState.htmlElementWrapper.updateContents();
     }
 
     return { htmlElement };
