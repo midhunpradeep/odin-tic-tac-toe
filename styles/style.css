@@ -1,15 +1,61 @@
+:root {
+  --color-1: #27005d;
+  --color-2: #9400ff;
+  --color-3: #aed2ff;
+  --color-4: #e4f1ff;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+
 body {
   min-height: 100dvh;
   display: grid;
   grid-template-rows: 1fr 1fr;
   gap: 1rem;
   padding: 1rem;
+  background-color: var(--color-1);
+}
+
+.game-state,
+.game-board {
+  background-color: var(--color-2);
+  border: solid var(--color-3);
+  border-width: 0 0 0.3rem 0.3rem;
+  border-radius: 1rem;
+}
+
+.game-state > *,
+.game-board > *,
+.name-change-dialog {
+  color: var(--color-1);
+  background-color: var(--color-4);
+  border: solid var(--color-3);
+  border-width: 0 0 0.3rem 0.3rem;
+  border-radius: 1rem;
+}
+
+.game-state button,
+.name-change-dialog button {
+  background-color: var(--color-2);
+  color: var(--color-3);
+  border: solid var(--color-3);
+  border-width: 0 0 0.3rem 0.3rem;
+  border-radius: 0.4rem;
+  padding: 0.33rem 1rem;
+}
+
+.game-state button:active,
+.name-change-dialog button:active,
+.game-board .board-cell:active {
+  border-width: 0.1rem 0.1rem 0.2rem 0.2rem;
 }
 
 .game-board {
   justify-self: center;
   align-self: end;
-  border: 1px solid black;
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   aspect-ratio: 1 / 1;
@@ -21,7 +67,6 @@ body {
 }
 
 .game-board .board-cell {
-  border: 1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +74,6 @@ body {
 }
 
 .game-state {
-  border: 1px solid black;
   min-width: 200px;
   display: grid;
   grid-template: 1fr 1fr / 2fr 1fr 1fr;
@@ -39,7 +83,6 @@ body {
 }
 
 .game-state .player-card {
-  border: 1px solid black;
   display: grid;
   grid-template-rows: min-content min-content min-content;
   padding: 1rem;
@@ -64,24 +107,26 @@ body {
 .game-state .turn-display {
   grid-row: 2;
   grid-column: 1 / -1;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 3rem;
 }
 
 .game-state .game-controls {
   grid-row: 1;
   grid-column: 1;
-  border: 1px solid black;
 
   display: grid;
   justify-content: center;
   align-items: center;
 }
 
+.game-state .game-controls .game-restart-btn {
+  font-size: 2rem;
+}
+
 .name-change-dialog {
-  border: 1px solid black;
   padding: 0;
   margin: auto;
 }
