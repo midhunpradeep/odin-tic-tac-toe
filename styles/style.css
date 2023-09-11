@@ -80,10 +80,13 @@ body {
   max-height: 48dvh;
 }
 
+.game-state > * {
+  padding: 1rem;
+}
+
 .game-state .player-card {
   display: grid;
   grid-template-rows: min-content min-content min-content;
-  padding: 1rem;
   gap: 1rem;
   justify-items: center;
   align-items: center;
