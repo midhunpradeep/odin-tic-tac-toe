@@ -74,6 +74,10 @@ body {
   grid-row: 1;
   grid-column: 1;
   border: 1px solid black;
+
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
 .name-change-dialog {

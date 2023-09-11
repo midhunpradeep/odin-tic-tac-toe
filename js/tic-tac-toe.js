@@ -67,6 +67,7 @@ const gameState = (function () {
     createPlayer("Player 1", "X"),
     createPlayer("Player 2", "O"),
   ];
+  let _startingPlayer = 0;
   let _currentPlayer = 0;
 
   const htmlElementWrapper = (function () {
@@ -101,6 +102,13 @@ const gameState = (function () {
 
     const _gameControls = document.createElement("div");
     _gameControls.classList.add("game-controls");
+    const _gameRestartBtn = document.createElement("button");
+    _gameRestartBtn.classList.add("game-restart-btn");
+    _gameRestartBtn.textContent = "Restart";
+    _gameRestartBtn.addEventListener("click", () => {
+      _reset();
+    });
+    _gameControls.appendChild(_gameRestartBtn);
     htmlElement.appendChild(_gameControls);
 
     function updateContents() {
@@ -116,6 +124,16 @@ const gameState = (function () {
 
   function getCurrentPlayer() {
     return _players[_currentPlayer];
+  }
+
+  function _reset() {
+    if (gameBoard.isGameOver()) {
+      _startingPlayer = (_startingPlayer + 1) % _players.length;
+    }
+    _currentPlayer = _startingPlayer;
+
+    gameBoard.reset();
+    htmlElementWrapper.updateContents();
   }
 
   return { htmlElementWrapper, nextPlayer, getCurrentPlayer };
@@ -212,7 +230,17 @@ const gameBoard = (function () {
     return true;
   }
 
-  return { isGameOver, getWinner, htmlElementWrapper };
+  function reset() {
+    for (const row of _array) {
+      for (let i = 0; i < row.length; i++) {
+        row[i] = null;
+      }
+    }
+
+    htmlElementWrapper.updateContents();
+  }
+
+  return { isGameOver, getWinner, reset, htmlElementWrapper };
 })();
 
 const main = (function () {
