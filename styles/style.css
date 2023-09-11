@@ -142,13 +142,26 @@ body > h1 {
 
 .name-change-dialog form {
   display: grid;
-  grid-template: 1fr 1fr / max-content 1fr 1fr;
+  grid-template: max-content 1fr 1fr / max-content 1fr 1fr;
   gap: 1rem 0.5rem;
   padding: 1rem 2rem;
+  align-items: center;
+}
+
+.name-change-dialog::backdrop {
+  background-color: rgba(0 0 0 / 60%);
+}
+
+.name-change-dialog form h2 {
+  grid-column: 1 / -1;
 }
 
 .name-change-dialog form input {
   grid-column: 2 / -1;
+  border-radius: 0.5rem;
+  border: 0;
+  background-color: var(--color-3);
+  padding: 0.2rem 1rem;
 }
 
 .name-change-dialog .new-name-change-btn {
